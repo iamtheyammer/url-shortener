@@ -1,0 +1,35 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "A simple URL shortner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./",
+    "dev": "supervisor ./src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamtheyammer/url-shortener.git"
+  },
+  "author": "iamtheyammer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamtheyammer/url-shortener/issues"
+  },
+  "homepage": "https://github.com/iamtheyammer/url-shortener#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-promise-router": "^3.0.3",
+    "moment": "^2.24.0",
+    "path": "^0.12.7",
+    "pg": "^7.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^7.13.0",
+    "supervisor": "^0.12.0"
+  }
+}
