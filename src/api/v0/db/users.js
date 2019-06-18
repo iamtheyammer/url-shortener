@@ -12,7 +12,7 @@ function getUserByEmailAndPassword(email, password) {
 
 function getUserIdBySession(sessionString) {
   return db.query(
-    'SELECT user_iod FROM ' + db.sessionsTableName + ' WHERE session_string=$1',
+    'SELECT user_id FROM ' + db.sessionsTableName + ' WHERE session_string=$1',
     [
       sessionString
     ]
