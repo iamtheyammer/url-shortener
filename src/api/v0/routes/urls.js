@@ -78,7 +78,7 @@ router.put('/update', (req, res) => {
   }
 
   if(!req.body.destination || req.body.shortlink) {
-    res.send(responseTypes.err('You need something to update!'));
+    res.send(responseTypes.Err('You need something to update!'));
   }
 
   users.getUserIdBySession(session)
