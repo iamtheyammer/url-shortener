@@ -77,7 +77,7 @@ router.put('/update', (req, res) => {
     res.send(responseTypes.Err('No URL ID.'));
   }
 
-  if(!req.body.destination || req.body.shortlink) {
+  if(!req.body.destination || !req.body.shortlink) {
     res.send(responseTypes.Err('You need something to update!'));
   }
 
