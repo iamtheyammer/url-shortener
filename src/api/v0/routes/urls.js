@@ -17,7 +17,7 @@ router.get('/getAll', (req, res) => {
   const session = getSession(req);
 
   if (!session) {
-    res.status(401).send(responseTypes.Err('No session.'));
+    return res.status(401).send(responseTypes.Err('No session.'));
   }
 
   users.getUserIdBySession(session)
@@ -42,7 +42,7 @@ router.post('/new', (req, res) => {
   const session = getSession(req);
 
   if (!session) {
-    res.status(401).send(responseTypes.Err('No session.'));
+    return res.status(401).send(responseTypes.Err('No session.'));
   }
 
   if(!req.body.destination) {
@@ -73,15 +73,15 @@ router.put('/update', (req, res) => {
   const session = getSession(req);
 
   if (!session) {
-    res.status(401).send(responseTypes.Err('No session.'));
+    return res.status(401).send(responseTypes.Err('No session.'));
   }
 
   if(!req.body.urlId) {
-    res.send(responseTypes.Err('No URL ID.'));
+    return res.send(responseTypes.Err('No URL ID.'));
   }
 
   if(!req.body.destination || !req.body.shortlink) {
-    res.send(responseTypes.Err('You need something to update!'));
+    return res.send(responseTypes.Err('You need something to update!'));
   }
 
   users.getUserIdBySession(session)
@@ -92,12 +92,12 @@ router.put('/update', (req, res) => {
 
       urls.updateUrlById(req.body.urlId, req.body.shortlink, req.body.destination)
         .then(() => {
-          res.status(200).send(responseTypes.Success({
+          return res.status(200).send(responseTypes.Success({
             shortlink: req.body.shortlink,
             destination: req.body.destination
           }));
         }).catch((err) => {
-          res.send(responseTypes.Err(err));
+          return res.send(responseTypes.Err(err));
         });
     });
 });
@@ -106,11 +106,11 @@ router.delete('/delete', (req, res) => {
   const session = getSession(req);
 
   if (!session) {
-    res.status(401).send(responseTypes.Err('No session.'));
+    return res.status(401).send(responseTypes.Err('No session.'));
   }
 
   if(!req.body.urlId) {
-    res.send(responseTypes.Err('Missing urlId.'));
+    return res.send(responseTypes.Err('Missing urlId.'));
   }
 
   users.getUserIdBySession(session)
@@ -121,9 +121,9 @@ router.delete('/delete', (req, res) => {
 
       urls.deleteUrlById(req.body.urlId)
         .then(() => {
-          res.status(200).send(responseTypes.Success());
+          return res.status(200).send(responseTypes.Success());
         }).catch((err) => {
-          res.send(responseTypes.Err(err));
+          return res.send(responseTypes.Err(err));
         }); 
     });
 });
