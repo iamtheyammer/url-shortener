@@ -1,6 +1,7 @@
 const Router = require('express-promise-router');
 const responseTypes = require('../../../utils/apiResponseTypes');
 const getSession = require('../../../utils/session');
+const genRandomString = require('../../../utils/random');
 const users = require('../db/users');
 const urls = require('../db/urls');
 // create a new express-promise-router
@@ -44,9 +45,11 @@ router.post('/new', (req, res) => {
     res.status(401).send(responseTypes.Err('No session.'));
   }
 
-  if(!req.body.shortlink || !req.body.destination) {
+  if(!req.body.destination) {
     return res.send(responseTypes.Err('No shortlink/destination.'));
   }
+
+  const shortlink = req.body.shortlink ? req.body.shortlink : genRandomString(8);
   
   users.getUserIdBySession(session)
     .then((user_id) => {
@@ -54,10 +57,10 @@ router.post('/new', (req, res) => {
         return res.status(401).send(responseTypes.Err('Invalid session.'));
       }
 
-      urls.newUrl(user_id, req.body.shortlink, req.body.destination)
+      urls.newUrl(user_id, shortlink, req.body.destination)
         .then(() => {
           res.status(200).send(responseTypes.Success({
-            shortlink: req.body.shortlink,
+            shortlink,
             destination: req.body.destination
           }));
         }).catch((err) => {
