@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log into the URL shortener</title>
+  </head>
+  <body>
+    <h3>Welcome to the Yammer URL shortener extension!</h3>
+    <p>To get started, log in!</p>
+    <div id="form">
+      <p>Enter your server URL.</p>
+      <input id="server-url" placeholder="yammer.me" type="text"><br>
+      <p>Enter your email.</p>
+      <input id="login-email" placeholder="hi@yammer.me" type="text"><br>
+      <p>Enter your password.</p>
+      <input id="login-password" placeholder="" type="password"><br><br>
+      <button id="form-submit">Submit</button>
+      <p id="form-error"></p>
+    </div>
+    <script src="../axios.min.js"></script>
+    <script src="../common.js"></script>
+    <script src="login.js"></script>
+  </body>
+</html>

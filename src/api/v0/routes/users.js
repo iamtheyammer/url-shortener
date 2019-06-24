@@ -31,6 +31,25 @@ router.post('/newSession', (req, res) => {
     });
 });
 
+router.post('/new', (req, res) => {
+  if(!req.user.validAuth) return responseTypes.Unauthorized(res);
+  if(!req.user.isSuperAdmin) return responseTypes.Forbidden(res);
+
+  users.addUser(req.body.email, req.body.password, req.body.isSuperAdmin)
+    .then(() => res.send(responseTypes.Success()));
+});
+
+router.put('/purgeSessions', (req, res) => {
+  if (!req.user.validAuth) return responseTypes.Unauthorized(res);
+  if(req.body.forUser) if(req.body.forUser !== req.user.id && req.body.isSuperAdmin === false) return responseTypes.Forbidden(res);
+
+  const forUser = req.body.forUser ? req.body.forUser : req.user.id;
+
+  users.purgeSessions(forUser, req.user.session).then(
+    (numSessionsRemoved) => res.send(responseTypes.Success(numSessionsRemoved + ' sessions removed, except for your current one.'))
+  );
+});
+
 
 // export our router to be mounted by the parent application
 module.exports = router;

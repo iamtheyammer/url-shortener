@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yammer URL Shortener</title>
+</head>
+  <body>
+    <div id="form" style="display: block;">
+      <h3>Create a URL!</h3>
+      <p>Shortlink</p>
+      <input type="text" id="form-shortlink" placeholder="leave blank for random"><br>
+      <p>Destnation</p>
+      <input type="text" id="form-destination"><br>
+      <br>
+      <button id="form-submit" type="submit">Submit</button>
+      <p id="form-error"></p>
+    </div>
+    <div id="success" style="display: none;">
+      <h3>Success!</h3>
+      <p>Shortlink successfully created at:</p>
+      <p id="success-shortlink-url"></p>
+      <button id="success-copy-shortlink">Click to copy shortlink</button>
+      <input style="opacity: 0; height: 1px;" id="success-shortlink-copy">
+    </div>
+    <script src="../common.js"></script>
+    <script src="default.js"></script>
+  </body>
+</html>
