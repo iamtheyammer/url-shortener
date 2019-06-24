@@ -12,8 +12,6 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
           }),
           storage.session,
           (response) => {
-
-            console.log(response);
             if (response.data.success === false || response.statusCode !== 200) {
               return sendResponse({
                 type: 'SHORTLINK_CREATE_ERROR',
@@ -23,12 +21,6 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
               });
             }
 
-            chrome.storage.sync.set(
-              {
-                'session': response.data.data.sessionKey,
-                'signed_in': true
-              }
-            );
             return sendResponse({
               type: 'SHORTLINK_CREATE_SUCCESS',
               data: {

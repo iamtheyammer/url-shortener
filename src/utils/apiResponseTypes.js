@@ -12,9 +12,9 @@ function Err(msg, res) {
 
 const Success = (msg, res) => {
   if (!msg && res) return res.send({ success: true });
-  if (!msg && !res) return { success: true, message: msg };
-  if (msg && res) return res.send({ success: true, message: msg });
-  if (msg && !res) return { success: true, message: msg };
+  if (!msg && !res) return { success: true, data: msg };
+  if (msg && res) return res.send({ success: true, data: msg });
+  if (msg && !res) return { success: true, data: msg };
 };
 
 const Forbidden = (res) => {
