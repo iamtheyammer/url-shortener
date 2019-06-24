@@ -12,7 +12,8 @@ function newUrl(userId, shortlink, destination) {
   ]);
 }
 
-function updateUrlById(urlId, newShortlink, newDestination) {
+function updateById(urlId, newShortlink, newDestination) {
+  console.log(urlId);
   if(newShortlink && !newDestination) {
     return updateShortlinkById(urlId, newShortlink);
   }
@@ -48,11 +49,11 @@ function updateDestinationById(urlId, newDestination) {
     ]);
 }
 
-function getAllUrls() {
+function getAll() {
   return db.query('SELECT * FROM ' + db.urlsTableName).then(dbResult => dbResult.rows);
 }
 
-function deleteUrlById(urlId) {
+function deleteById(urlId) {
   return db.query('DELETE FROM ' + db.urlsTableName + ' WHERE id=$1', [ urlId ]);
 }
 
@@ -61,10 +62,18 @@ function getDestinationFromShortlink(shortlink) {
     .then((dbResult) => dbResult.rows[0] ? dbResult.rows[0].destination : null);
 }
 
+function getByShortlink(shortlink) {
+  return db.query('SELECT * FROM ' + db.urlsTableName + ' WHERE shortlink=$1', [
+    shortlink
+  ]).then(dbResult => dbResult.rows[0] ? dbResult.rows[0] : null);
+}
+
 module.exports = {
   newUrl,
-  updateUrlById,
-  getAllUrls,
-  deleteUrlById,
-  getDestinationFromShortlink
+  updateById,
+  getAll,
+  deleteById,
+  getDestinationFromShortlink,
+  getByShortlink,
+
 };

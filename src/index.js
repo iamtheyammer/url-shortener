@@ -14,6 +14,7 @@ app.use(cookieParser());
 //   next();
 // });
 
+app.use('/api/', require('./api/v0/middleware/auth.js'));
 app.use('/api/', require('./api/index')); // API routes
 
 // Serve static files

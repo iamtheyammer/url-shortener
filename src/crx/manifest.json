@@ -1,0 +1,21 @@
+{
+  "name": "Yammer URL Shortener",
+  "version": "1.0",
+  "description": "Allows the easy creation of shortlinks.",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+  },
+  "background": {
+    "scripts": [
+      "background/popup/handlePopup.background.js",
+      "background/messageHandlers/login.js",
+      "background/messageHandlers/shortlink.js",
+      "background/messageHandlers/tabs.js"
+    ],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
