@@ -1,13 +1,13 @@
 const getUserBySession = require('../db/users.js').getUserBySession;
 function authMiddleware(req, res, next) {
- if (!req.headers.session && !req.cookies.session) {
+ if (!req.headers['x-yammer-session'] && !req.cookies.session) {
    req.invalidSession = true;
    req.user = {
      validAuth: false
    };
    return next();
  }
- const session = req.headers.session ? req.headers.session : req.cookies.session;
+ const session = req.headers['x-yammer-session'] ? req.headers['x-yammer-session'] : req.cookies.session;
  return getUserBySession(session).then(user => {
    req.user = {
      session,

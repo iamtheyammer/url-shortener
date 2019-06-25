@@ -3,7 +3,7 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
   switch (req.type) {
     case 'SHORTLINK_CREATE':
       chrome.storage.sync.get(['session', 'server_url'], (storage) => {
-        makeXhr(
+        makeXhrWithoutSession(
           'POST',
           'https://' + storage['server_url'] + '/api/v0/urls/new',
           JSON.stringify({
@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
   return true;
 });
 
-function makeXhr(method, url, data, session, callback) {
+function makeXhrWithoutSession(method, url, data, session, callback) {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4) {
@@ -53,7 +53,7 @@ function makeXhr(method, url, data, session, callback) {
     }
   };
   xhttp.open(method, url, true);
-  if(session) xhttp.setRequestHeader('session', session);
+  if(session) xhttp.setRequestHeader('X-Yammer-Session', session);
   xhttp.setRequestHeader('Content-Type', 'application/json');
   xhttp.send(data);
 }

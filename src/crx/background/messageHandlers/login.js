@@ -10,8 +10,6 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
           password: req.data.password
         }),
         (response) => {
-
-          console.log(response);
           if(response.data.success === false || response.statusCode !== 200) {
             return sendResponse({
               type: 'LOGIN_SUBMIT_USER_DETAILS_ERROR',
