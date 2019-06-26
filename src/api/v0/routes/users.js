@@ -35,6 +35,13 @@ router.post('/new', (req, res) => {
   if(!req.user.validAuth) return responseTypes.Unauthorized(res);
   if(!req.user.isSuperAdmin) return responseTypes.Forbidden(res);
 
+  if(!req.body.email || !req.body.password || !req.body.isSuperAdmin) {
+    return responseTypes.BadRequest(
+      'Make sure you have email, password and isSuperAdmin.',
+      res
+    )
+  }
+
   users.addUser(req.body.email, req.body.password, req.body.isSuperAdmin)
     .then(() => res.send(responseTypes.Success()));
 });
